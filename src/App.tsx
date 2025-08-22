@@ -1,10 +1,18 @@
 
-import './App.css'
+import { Route, Routes } from "react-router"
+import Home from "./pages/Home"
+import NavBar from "./components/NavBar"
 
 const App = () => {
   return(
-    <div>
-      <h1 className='bg-amber-600 text-8xl'>Connectify</h1>
+    <div className="min-h-screen bg-black text-gray-100 transition-opacity duration-700 pt-20">
+      <NavBar />
+      <div className="container mx-auto px-4 py-6">
+        <Routes>
+          <Route path="/" element={<Home />} />
+
+        </Routes>
+      </div>
     </div>
   )
 }
