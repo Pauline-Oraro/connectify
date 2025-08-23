@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const {signInWithGitHub, signOut, user} = useAuth();
+
+  const displayName = user?.user_metadata.user_name || user?.email;
   return (
     <nav className="fixed top-0 w-full z-40 bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
       <div className="max-w-5xl mx-auto px-4">
@@ -39,6 +44,36 @@ const NavBar = () => {
             </Link>
           </div>
 
+           {/* desktop auth */}
+          <div className="hidden md:flex items-center">
+            {user ? (
+              <div className="flex items-center space-x-4">
+                {user.user_metadata?.avatar_url && (
+                  <img
+                    src={user.user_metadata.avatar_url}
+                    alt="User Avatar"
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                )}
+                <span className="text-gray-300">{displayName}</span>
+                <button
+                  onClick={signOut}
+                  className="bg-red-500 px-3 py-1 rounded"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={signInWithGitHub}
+                className="bg-blue-500 px-3 py-1 rounded"
+              >
+                Sign in with GitHub
+              </button>
+            )}
+          </div>
+
+          
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
@@ -76,7 +111,7 @@ const NavBar = () => {
 
       {/* Mobile nav */}
       {menuOpen && (
-        <div className="md:hidden bg-[rgba(10,10,10,0.9)] flex flex-col items-center">
+        <div className="md:hidden bg-[rgba(10,10,10,0.9)] flex flex-col items-center mx-auto h-screen gap-3.5">
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link
               to="/"
@@ -102,8 +137,38 @@ const NavBar = () => {
             >
               Create Community
             </Link>
+
+            
+            {/* mobile auth */}
+              {user ? (
+              <div className="flex items-center space-x-4">
+                {user.user_metadata?.avatar_url && (
+                  <img
+                    src={user.user_metadata.avatar_url}
+                    alt="User Avatar"
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                )}
+                <span className="text-gray-300">{displayName}</span>
+                <button
+                  onClick={signOut}
+                  className="bg-red-500 px-3 py-1 rounded"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={signInWithGitHub}
+                className="bg-blue-500 px-3 py-1 rounded"
+              >
+                Sign in with GitHub
+              </button>
+            )}
+          
           </div>
-        </div>
+          </div>
+      
       )}
     </nav>
   );
