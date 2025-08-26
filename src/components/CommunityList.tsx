@@ -51,7 +51,7 @@ const CommunityList = () => {
           >{community.name}</Link>
 
           <p className="text-gray-400 mt-2">{community.description}</p>
-          
+
         </div>
       ))}
     </div>
