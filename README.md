@@ -24,7 +24,7 @@
 - [Development Notes](#development-notes)
 - [Deployment](#deployment)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Overview
 
@@ -223,6 +223,4 @@ npm run build
 
 Please keep changes focused, follow the existing TypeScript and React conventions, and avoid committing secrets or local environment files.
 
-## License
 
-No license has been specified for this repository. All rights are currently reserved by the repository owner unless an open-source license is explicitly added.
